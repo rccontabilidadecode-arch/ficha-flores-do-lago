@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cadastro Flores do Lago</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#121212);--card:light-dark(#ffffff,#1c1c1c);--ink:light-dark(#151515,#f2f2f2);--mut:light-dark(#5b5b5b,#b3b3b3);--line:light-dark(#dcdcdc,#383838);--acc:#e5461f;--accd:light-dark(#b8320f,#ff7a55);--soft:light-dark(#fdf0eb,#2a1a14)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Source Sans 3",system-ui,sans-serif;overflow-x:clip}
+header{background:var(--acc);color:#fff;padding:clamp(20px,3vw,36px) max(5vw,16px)}
+.hin{max-width:820px;margin:auto;display:flex;gap:20px;align-items:center}
+.logo{flex:none;width:112px;height:112px;background:#fff;border-radius:14px;padding:6px;display:grid;place-items:center}
+.logo img{width:100%;height:100%;object-fit:contain}
+h1{font:700 clamp(26px,4vw,38px)/1.05 "Josefin Sans",sans-serif;margin:0 0 6px;text-wrap:balance}
+header p{margin:0;font-size:16px;opacity:.95}
+main{max-width:820px;margin:auto;padding:24px max(5vw,16px) 64px}
+.intro{color:var(--mut);margin:0 0 8px}
+fieldset{border:0;border-top:2px solid var(--ink);margin:28px 0 0;padding:14px 0 0}
+legend{font:700 21px/1.2 "Josefin Sans",sans-serif;padding:0 10px 0 0}
+.hint{color:var(--mut);font-size:14px;margin:4px 0 10px}
+.g{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 14px}
+.c2{grid-column:span 2}.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}
+label{display:block;font-weight:600;font-size:14px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+label b{color:var(--accd)}
+input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:44px}
+textarea{min-height:76px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid color-mix(in srgb,var(--acc) 45%,transparent);outline-offset:1px;border-color:var(--acc)}
+.bad{border-color:#d11a1a!important;background:light-dark(#fff3f3,#2b1414)}
+.err{color:#d11a1a;font-size:13px;min-height:0;margin-top:2px}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.radios label{font-weight:400;font-size:16px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-height:44px;cursor:pointer;margin:0}
+.radios input{width:18px;height:18px;min-height:0;accent-color:var(--acc)}
+.radios label:has(input:checked){border-color:var(--acc);background:var(--soft)}
+.box{background:var(--soft);border-radius:10px;padding:14px 16px;margin-top:14px}
+.box h3{margin:0 0 8px;font:700 17px/1.2 "Josefin Sans",sans-serif}
+.hide{display:none}
+.carga{font:700 clamp(26px,5vw,34px)/1 "Josefin Sans",sans-serif;color:var(--accd)}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+button,.btn{font:600 16px/1 "Source Sans 3",sans-serif;border-radius:10px;padding:14px 20px;min-height:48px;cursor:pointer;border:2px solid var(--acc);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.pri{background:var(--acc);color:#fff}.sec{background:transparent;color:var(--accd)}
+#out{margin-top:28px;border:2px solid var(--acc);border-radius:12px;padding:18px}
+#out h2{font:700 22px/1.2 "Josefin Sans",sans-serif;margin:0 0 6px}
+#resumo{white-space:pre-wrap;font:14px/1.5 ui-monospace,Consolas,monospace;background:var(--soft);padding:12px;border-radius:8px;max-height:360px;overflow:auto}
+.small{font-size:13px;color:var(--mut)}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:14px;font-size:13px;color:var(--mut)}
+@media(max-width:600px){.g{grid-template-columns:minmax(0,1fr)}.c2,.c3,.c4,.c6{grid-column:auto}.hin{flex-direction:column;align-items:flex-start}.logo{width:92px;height:92px}label{white-space:normal}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="logo"><img alt="Logo Orquidário Flores do Lago" src="data:image/png;base64,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"></div>
+  <div><h1>Ficha de cadastro de clientes e fornecedores</h1>
+  <p>FLORES DO LAGO LTDA EPP · Orquidário Flores do Lago</p></div>
+</div></header>
+
+<main>
+<p class="intro">Preencha os dados abaixo para mantermos seu cadastro atualizado, inclusive as informações exigidas pela Reforma Tributária (IBS e CBS – LC 214/2025). Campos com <b style="color:var(--accd)">*</b> são obrigatórios.</p>
+
+<form id="f" novalidate>
+<fieldset><legend>Tipo de cadastro</legend>
+  <div class="radios">
+    <label><input type="radio" name="tipo" value="Cliente" checked> Cliente</label>
+    <label><input type="radio" name="tipo" value="Fornecedor"> Fornecedor</label>
+    <label><input type="radio" name="tipo" value="Cliente e fornecedor"> Cliente e fornecedor</label>
+  </div>
+</fieldset>
+
+<fieldset><legend>Dados cadastrais</legend>
+<div class="g">
+  <div class="c6"><label for="razao">Razão social <b>*</b></label><input id="razao" required></div>
+  <div class="c4"><label for="fantasia">Nome fantasia</label><input id="fantasia"></div>
+  <div class="c2"><label for="cnpj">CNPJ / CPF <b>*</b></label><input id="cnpj" required inputmode="text" placeholder="00.000.000/0000-00"><div class="err" id="cnpjErr"></div></div>
+  <div class="c3"><label for="ie">Inscrição estadual</label><input id="ie" placeholder="Número ou ISENTO"></div>
+  <div class="c3"><label for="im">Inscrição municipal</label><input id="im"></div>
+  <div class="c2"><label for="abertura">Data de abertura</label><input id="abertura" type="date"></div>
+</div></fieldset>
+
+<fieldset><legend>Endereço</legend>
+<div class="g">
+  <div class="c2"><label for="cep">CEP <b>*</b></label><input id="cep" required inputmode="numeric" placeholder="00000-000"></div>
+  <div class="c4"><label for="logr">Logradouro <b>*</b></label><input id="logr" required></div>
+  <div class="c2"><label for="num">Número <b>*</b></label><input id="num" required></div>
+  <div class="c4"><label for="compl">Complemento</label><input id="compl"></div>
+  <div class="c2"><label for="bairro">Bairro <b>*</b></label><input id="bairro" required></div>
+  <div class="c3"><label for="cidade">Município <b>*</b></label><input id="cidade" required></div>
+  <div class="c1" style="grid-column:span 1"><label for="uf">UF <b>*</b></label><select id="uf" required></select></div>
+</div></fieldset>
+
+<fieldset><legend>Contato</legend>
+<div class="g">
+  <div class="c2"><label for="tel">Telefone fixo</label><input id="tel" inputmode="tel" placeholder="(34) 0000-0000"></div>
+  <div class="c2"><label for="cel">Celular / WhatsApp <b>*</b></label><input id="cel" required inputmode="tel" placeholder="(34) 90000-0000"></div>
+  <div class="c2"><label for="email">E-mail <b>*</b></label><input id="email" type="email" required></div>
+  <div class="c3"><label for="emailnf">E-mail para envio de NF-e / XML</label><input id="emailnf" type="email"></div>
+  <div class="c3"><label for="contato">Pessoa de contato <b>*</b></label><input id="contato" required></div>
+  <div class="c3"><label for="cargo">Cargo / setor do contato</label><input id="cargo"></div>
+</div></fieldset>
+
+<fieldset><legend>Atividade econômica</legend>
+<div class="g">
+  <div class="c2"><label for="cnae">CNAE principal <b>*</b></label><input id="cnae" required placeholder="0000-0/00"></div>
+  <div class="c4"><label for="cnaedesc">Descrição da atividade principal <b>*</b></label><input id="cnaedesc" required></div>
+  <div class="c6"><label for="cnaesec">CNAEs secundários (código e descrição, um por linha)</label><textarea id="cnaesec"></textarea></div>
+</div></fieldset>
+
+<fieldset><legend>Regime de tributação</legend>
+<div class="g">
+  <div class="c6"><label for="regime">Regime <b>*</b></label>
+  <select id="regime" required>
+    <option value="">Selecione…</option>
+    <option>Simples Nacional – puro (IBS/CBS recolhidos no DAS)</option>
+    <option>Simples Nacional – híbrido (IBS/CBS pelo regime regular)</option>
+    <option>MEI</option>
+    <option>Lucro Presumido</option>
+    <option>Lucro Real</option>
+    <option>Produtor rural pessoa física</option>
+    <option>Produtor rural – não contribuinte (receita inferior a R$ 3,6 milhões)</option>
+    <option>Entidade imune / isenta</option>
+    <option>Outro</option>
+  </select></div>
+</div>
+<div class="box hide" id="snBox">
+  <h3 id="snTit">Simples Nacional</h3>
+  <p class="hint" id="snHint"></p>
+  <div class="g">
+    <div class="c2"><label for="snAnexo">Anexo do Simples <b>*</b></label><select id="snAnexo"><option value="">Selecione…</option><option>Anexo I – Comércio</option><option>Anexo II – Indústria</option><option>Anexo III – Serviços</option><option>Anexo IV – Serviços</option><option>Anexo V – Serviços</option></select></div>
+    <div class="c2"><label for="snFaixa">Faixa de receita (RBT12) <b>*</b></label><select id="snFaixa"><option value="">Selecione…</option><option>1ª faixa – até R$ 180.000,00</option><option>2ª faixa – R$ 180.000,01 a R$ 360.000,00</option><option>3ª faixa – R$ 360.000,01 a R$ 720.000,00</option><option>4ª faixa – R$ 720.000,01 a R$ 1.800.000,00</option><option>5ª faixa – R$ 1.800.000,01 a R$ 3.600.000,00</option><option>6ª faixa – R$ 3.600.000,01 a R$ 4.800.000,00</option></select></div>
+    <div class="c2"><label for="snCarga">Carga tributária efetiva (%) <b>*</b></label><input id="snCarga" inputmode="decimal" placeholder="Ex.: 6,54"></div>
+  </div>
+</div>
+</fieldset>
+
+<fieldset><legend>IBS e CBS – Reforma Tributária</legend>
+<p class="hint">Informe a tributação aplicada nas operações com a Flores do Lago, conforme a tabela oficial de CST e cClassTrib (Informe Técnico 2025.002).</p>
+<div class="g">
+  <div class="c3"><label for="cst">CST IBS/CBS <b>*</b></label><select id="cst" required></select></div>
+  <div class="c3"><label for="cclass">cClassTrib (6 dígitos) <b>*</b></label><input id="cclass" required inputmode="numeric" maxlength="6" placeholder="Ex.: 000001"><div class="err" id="cclassErr"></div></div>
+  <div class="c2"><label for="indop">cIndOp (indicador da operação)</label><input id="indop" inputmode="numeric" maxlength="6" placeholder="6 dígitos"></div>
+  <div class="c4"><label for="ncm">Principais NCM / NBS / item da LC 116 fornecidos</label><input id="ncm" placeholder="Ex.: 0602.90.90"></div>
+  <div class="c2"><label for="aCbs">Alíquota CBS (%)</label><input id="aCbs" inputmode="decimal" placeholder="2026: 0,9"></div>
+  <div class="c2"><label for="aIbsUf">Alíquota IBS estadual (%)</label><input id="aIbsUf" inputmode="decimal" placeholder="2026: 0,1"></div>
+  <div class="c2"><label for="aIbsMun">Alíquota IBS municipal (%)</label><input id="aIbsMun" inputmode="decimal" placeholder="2026: 0"></div>
+</div>
+<div class="box">
+  <h3>Benefício fiscal (se houver)</h3>
+  <div class="g">
+    <div class="c4"><label for="anexo">Anexo do benefício – LC 214/2025</label><select id="anexo"></select></div>
+    <div class="c2"><label for="reducao">Redução de alíquota (%)</label><input id="reducao" inputmode="decimal" placeholder="Ex.: 60"></div>
+    <div class="c2"><label for="artigo">Artigo da LC 214/2025</label><input id="artigo" placeholder="Ex.: art. 137"></div>
+    <div class="c4"><label for="benef">Observações sobre o benefício</label><input id="benef"></div>
+  </div>
+  <p class="small">O artigo e a redução são sugeridos ao escolher o anexo; confira e ajuste se necessário.</p>
+</div>
+</fieldset>
+
+<fieldset><legend>Dados bancários (para fornecedores)</legend>
+<div class="g">
+  <div class="c3"><label for="pix">Chave PIX</label><input id="pix"></div>
+  <div class="c3"><label for="banco">Banco / agência / conta</label><input id="banco"></div>
+</div></fieldset>
+
+<fieldset><legend>Responsável pelas informações</legend>
+<div class="g">
+  <div class="c3"><label for="resp">Nome <b>*</b></label><input id="resp" required></div>
+  <div class="c3"><label for="obs">Observações</label><input id="obs"></div>
+  <div class="c6"><div class="radios"><label style="white-space:normal"><input type="checkbox" id="decl" required> Declaro que as informações prestadas são verdadeiras e autorizo seu uso para fins cadastrais e fiscais. <b>*</b></label></div><div class="err" id="declErr"></div></div>
+</div></fieldset>
+
+<div class="acts">
+  <button class="pri" type="submit">Concluir cadastro</button>
+  <button class="sec" type="button" id="limpar">Limpar formulário</button>
+</div>
+<p class="err" id="geral"></p>
+</form>
+
+<section id="out" class="hide" aria-live="polite">
+  <h2>Cadastro concluído</h2>
+  <p id="envio" style="font-weight:600"></p>
+  <p class="small">Se preferir, envie também por WhatsApp ou e-mail:</p>
+  <div class="acts" style="margin-top:10px">
+    <a class="btn pri" id="wa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+    <a class="btn sec" id="em" href="#">Enviar por e-mail</a>
+    <button class="sec" type="button" id="copiar">Copiar dados</button>
+  </div>
+  <p class="small">E-mail: <span id="emTxt"></span> · WhatsApp: <span id="waTxt"></span> — se o botão não abrir, copie os dados e envie manualmente.</p>
+  <div id="resumo"></div>
+</section>
+
+<footer>Cadastro solicitado por FLORES DO LAGO LTDA EPP · Atendimento contábil: RC Assessoria Contábil &amp; Adm. Condomínios · Patos de Minas/MG</footer>
+</main>
+
+<script>
+{
+const DESTINO_EMAIL='pessoal.rccontabilidade@gmail.com';
+const DESTINO_WHATS='5534999661330';
+const $=id=>document.getElementById(id);
+const UFS='AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ');
+$('uf').innerHTML='<option value="">–</option>'+UFS.map(u=>`<option${u==='MG'?' selected':''}>${u}</option>`).join('');
+const CST=[['000','Tributação integral'],['010','Tributação com alíquotas uniformes'],['011','Alíquotas uniformes reduzidas'],['200','Alíquota reduzida / zero'],['210','Alíquota reduzida com redutor de base de cálculo'],['220','Alíquota fixa'],['221','Alíquota fixa proporcional'],['222','Redução de base de cálculo'],['400','Isenção'],['410','Imunidade e não incidência'],['510','Diferimento'],['515','Diferimento com redução de alíquota'],['550','Suspensão'],['620','Tributação monofásica'],['800','Transferência de crédito'],['810','Ajustes'],['820','Tributação em declaração de regime específico'],['830','Exclusão da base de cálculo']];
+$('cst').innerHTML='<option value="">Selecione…</option>'+CST.map(c=>`<option value="${c[0]}">${c[0]} – ${c[1]}</option>`).join('');
+const ANX=[['','Sem benefício','',''],
+['I','Anexo I – Cesta Básica Nacional de Alimentos (alíquota zero)','art. 125','100'],
+['II','Anexo II – Serviços de educação (redução 60%)','art. 129','60'],
+['III','Anexo III – Serviços de saúde (redução 60%)','art. 130','60'],
+['IV','Anexo IV – Dispositivos médicos (redução 60%)','art. 131','60'],
+['V','Anexo V – Dispositivos de acessibilidade PcD (redução 60%)','art. 132','60'],
+['VI','Anexo VI – Nutrição enteral e parenteral (redução 60%)','art. 133','60'],
+['VII','Anexo VII – Alimentos destinados ao consumo humano (redução 60%)','art. 135','60'],
+['VIII','Anexo VIII – Higiene pessoal e limpeza (redução 60%)','art. 136','60'],
+['IX','Anexo IX – Insumos agropecuários e aquícolas (redução 60%)','art. 138','60'],
+['X','Anexo X','',''],
+['XI','Anexo XI – Soberania e segurança nacional (redução 60%)','art. 142','60'],
+['XII','Anexo XII – Dispositivos médicos (alíquota zero)','art. 144','100'],
+['XIII','Anexo XIII – Dispositivos de acessibilidade PcD (alíquota zero)','art. 145','100'],
+['XIV','Anexo XIV – Medicamentos (alíquota zero)','art. 146','100'],
+['XV','Anexo XV – Produtos hortícolas, frutas e ovos (alíquota zero)','art. 148','100'],
+['AGRO','Sem anexo – Produtos agropecuários in natura (redução 60%)','art. 137','60'],
+['OUT','Outro benefício (descrever)','','']];
+$('anexo').innerHTML=ANX.map((a,i)=>`<option value="${i}">${a[1]}</option>`).join('');
+$('anexo').addEventListener('change',e=>{const a=ANX[+e.target.value];$('artigo').value=a[2];$('reducao').value=a[3];});
+
+const dig=s=>s.replace(/\D/g,'');
+function maskDoc(v){const s=v.toUpperCase().replace(/[^0-9A-Z]/g,'').slice(0,14);
+  if(s.length<=11&&/^\d*$/.test(s)) return s.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+  return s.replace(/^(\w{2})(\w)/,'$1.$2').replace(/^(\w{2})\.(\w{3})(\w)/,'$1.$2.$3').replace(/\.(\w{3})(\w)/,'.$1/$2').replace(/(\w{4})(\d{1,2})$/,'$1-$2');}
+function okCPF(c){if(c.length!==11||/^(\d)\1+$/.test(c))return false;for(let t=9;t<11;t++){let s=0;for(let i=0;i<t;i++)s+=+c[i]*(t+1-i);if(((s*10)%11)%10!==+c[t])return false}return true}
+function okCNPJ(c){if(c.length!==14||/^(\w)\1+$/.test(c)||!/^[0-9A-Z]{12}\d{2}$/.test(c))return false;const v=ch=>ch.charCodeAt(0)-48;
+  const dv=n=>{let w=n-7,s=0;for(let i=0;i<n;i++){s+=v(c[i])*w;w=w===2?9:w-1}const r=s%11;return r<2?0:11-r};return dv(12)===+c[12]&&dv(13)===+c[13]}
+const docOk=v=>{const s=v.toUpperCase().replace(/[^0-9A-Z]/g,'');return s.length===11?okCPF(s):okCNPJ(s)};
+$('cnpj').addEventListener('input',e=>{e.target.value=maskDoc(e.target.value)});
+$('cep').addEventListener('input',e=>{const s=dig(e.target.value).slice(0,8);e.target.value=s.replace(/(\d{5})(\d)/,'$1-$2')});
+const maskTel=e=>{const s=dig(e.target.value).slice(0,11);e.target.value=s.length>10?s.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3'):s.replace(/(\d{2})(\d{0,4})(\d{0,4})/,(m,a,b,c)=>`(${a}) ${b}${c?'-'+c:''}`)};
+$('tel').addEventListener('input',maskTel);$('cel').addEventListener('input',maskTel);
+$('cnae').addEventListener('input',e=>{const s=dig(e.target.value).slice(0,7);e.target.value=s.replace(/(\d{4})(\d)/,'$1-$2').replace(/-(\d)(\d{1,2})$/,'-$1/$2')});
+$('cclass').addEventListener('input',e=>{e.target.value=dig(e.target.value).slice(0,6)});
+$('indop').addEventListener('input',e=>{e.target.value=dig(e.target.value).slice(0,6)});
+$('cst').addEventListener('change',e=>{const c=$('cclass');if(e.target.value&&!c.value.startsWith(e.target.value))c.value=e.target.value})
+
+function regimeUI(){const r=$('regime').value,sn=r.startsWith('Simples');$('snBox').classList.toggle('hide',!sn);
+  ['snAnexo','snFaixa','snCarga'].forEach(id=>$(id).required=sn);
+  if(sn){const h=r.includes('híbrido');$('snTit').textContent=h?'Simples Nacional – regime híbrido':'Simples Nacional – regime puro';
+  $('snHint').textContent=h?'IBS e CBS apurados fora do DAS, pelo regime regular (art. 41 da LC 214/2025). Informe o anexo, a faixa e a carga efetiva do DAS; as alíquotas de IBS/CBS vão no bloco abaixo.':'IBS e CBS recolhidos dentro do DAS. Informe o anexo, a faixa e a carga tributária efetiva total do DAS.'}}
+$('regime').addEventListener('change',regimeUI);
+
+const KEY='flcad-v1';
+const campos=()=>[...document.querySelectorAll('#f input:not([type=radio]):not([type=checkbox]),#f select,#f textarea')];
+function salvar(){try{const d={};campos().forEach(c=>d[c.id]=c.value);d.tipo=document.querySelector('[name=tipo]:checked').value;localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d){campos().forEach(c=>{if(d[c.id]!=null)c.value=d[c.id]});const t=document.querySelector(`[name=tipo][value="${CSS.escape(d.tipo||'Cliente')}"]`);if(t)t.checked=true}}catch(e){}
+regimeUI();
+$('f').addEventListener('input',salvar);$('f').addEventListener('change',salvar);
+$('limpar').addEventListener('click',()=>{$('f').reset();try{localStorage.removeItem(KEY)}catch(e){};regimeUI();$('out').classList.add('hide');document.querySelectorAll('.bad').forEach(x=>x.classList.remove('bad'));document.querySelectorAll('.err').forEach(x=>x.textContent='')});
+
+const L=id=>{const l=document.querySelector(`label[for="${id}"]`);return l?l.textContent.replace('*','').trim():id};
+const val=id=>{const el=$(id);if(el.tagName==='SELECT'){const o=el.options[el.selectedIndex];return el.value===''||!o?'':o.text}return el.value.trim()};
+$('f').addEventListener('submit',e=>{e.preventDefault();let bad=[];
+  document.querySelectorAll('.bad').forEach(x=>x.classList.remove('bad'));document.querySelectorAll('.err').forEach(x=>x.textContent='');
+  campos().forEach(c=>{if(c.required&&!c.value.trim()){c.classList.add('bad');bad.push(c)}});
+  if($('cnpj').value&&!docOk($('cnpj').value)){$('cnpj').classList.add('bad');$('cnpjErr').textContent='CNPJ/CPF inválido';bad.push($('cnpj'))}
+  const cc=$('cclass').value;if(cc&&(cc.length!==6||($('cst').value&&!cc.startsWith($('cst').value)))){$('cclass').classList.add('bad');$('cclassErr').textContent='6 dígitos, iniciando pelo CST';bad.push($('cclass'))}
+  if(!$('decl').checked){$('declErr').textContent='Marque a declaração para concluir';bad.push($('decl'))}
+  if(bad.length){$('geral').textContent=`Verifique ${bad.length} campo(s) destacado(s).`;bad[0].focus();return}
+  $('geral').textContent='';
+  const tipo=document.querySelector('[name=tipo]:checked').value;
+  const sec=(t,ids)=>{const ls=ids.map(id=>[L(id),val(id)]).filter(x=>x[1]);return ls.length?`\n■ ${t}\n`+ls.map(x=>`${x[0]}: ${x[1]}`).join('\n'):''};
+  const sn=$('regime').value.startsWith('Simples');
+  let txt=`CADASTRO – FLORES DO LAGO LTDA EPP\nTipo: ${tipo}\nData: ${new Date().toLocaleDateString('pt-BR')}\n`+
+   sec('Dados cadastrais',['razao','fantasia','cnpj','ie','im','abertura'])+
+   sec('Endereço',['logr','num','compl','bairro','cidade','uf','cep'])+
+   sec('Contato',['tel','cel','email','emailnf','contato','cargo'])+
+   sec('Atividade',['cnae','cnaedesc','cnaesec'])+
+   sec('Regime de tributação',['regime'].concat(sn?['snAnexo','snFaixa','snCarga']:[]))+
+   sec('IBS/CBS',['cst','cclass','indop','ncm','aCbs','aIbsUf','aIbsMun'])+
+   ($('anexo').value!=='0'?sec('Benefício – LC 214/2025',['anexo','reducao','artigo','benef']):'')+
+   sec('Dados bancários',['pix','banco'])+
+   sec('Responsável',['resp','obs'])+'\nDeclaração de veracidade: aceita';
+  $('resumo').textContent=txt;
+  $('wa').href='https://wa.me/'+DESTINO_WHATS+'?text='+encodeURIComponent(txt);
+  $('em').href='mailto:'+DESTINO_EMAIL+'?subject='+encodeURIComponent('Cadastro Flores do Lago – '+val('razao'))+'&body='+encodeURIComponent(txt);
+  $('emTxt').textContent=DESTINO_EMAIL;$('waTxt').textContent='(34) 99966-1330';
+  $('out').classList.remove('hide');
+  const st=$('envio');st.textContent='Enviando cadastro…';st.style.color='';
+  fetch('https://formsubmit.co/ajax/'+DESTINO_EMAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({_subject:'Cadastro Flores do Lago – '+val('razao'),_template:'box',_captcha:'false',Tipo:tipo,Cadastro:txt})})
+  .then(r=>r.json()).then(j=>{if(j.success==='false'||j.success===false)throw 0;st.textContent='✓ Cadastro enviado com sucesso. Obrigado!';st.style.color='#1a7f37';try{localStorage.removeItem(KEY)}catch(e){}})
+  .catch(()=>{st.textContent='Não foi possível enviar automaticamente. Use o WhatsApp ou o e-mail abaixo.';st.style.color='#d11a1a'});$('out').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+});
+$('copiar').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('resumo').textContent);$('copiar').textContent='Copiado ✓'}catch(e){$('copiar').textContent='Selecione o texto e copie'}});
+}
+</script>
+</body>
+</html>
